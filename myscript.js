@@ -26,17 +26,11 @@ function show(data) {
    </tr>`
 
    for(let r in data) {
-        //const obj = JSON.parse(data[r]);
         const obj = data[r];
         tab += `<tr>
         <td>${obj.name} </td>
-        <td>${obj.url}</td>        
+        <td><a href=\"${obj.url}\"</a>${obj.url}</td>        
     </tr>`
    }
     document.getElementById("pokemon").innerHTML = tab;
-}
-
-function showArray(data) {
-    //let dArr = JSON.parse(data);
-
 }
