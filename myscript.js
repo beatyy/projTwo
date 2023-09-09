@@ -24,13 +24,13 @@ function show(data) {
     generateTable(table, data);
 }
 
-/*function displayBerries(moo) {
+function displayBerries(moo) {
     let table = document.getElementById("berries");
     //let data = Object.keys(moo);
     let tableH = ["Berries", "url"];
     generateTableHead(table, tableH)
     generateSecondTable(table, moo);
-}*/
+}
 
 function generateTableHead(table, data) {
     let thead = table.createTHead();
@@ -49,23 +49,25 @@ function generateTable(table, data) {
         for(key in element) {
             let cell = row.insertCell();
             let text = document.createTextNode(element[key]);
-           
+            if(key == 'url') {   
+                toby = 'getSecondApi("' + element[key] + '")';
+                cell.setAttribute('onclick', toby);           
+                /*text.onclick=function(){
+                    getSecondApi(element[key]);
+                }*/
+            }
             cell.appendChild(text)
         }
     }
 }
-/*
+
 function generateSecondTable(table, data) {
     for(let element of data) {
         let row = table.insertRow();
         for(key in element) {
             let cell = row.insertCell();
             let text = document.createTextNode(element[key]);
-            if(key == 'url') {               
-                text.addEventListener('click', function(){
-                    getSecondApi(element[key]);
-                })
-            }
+
             cell.appendChild(text)
         }
     }
@@ -81,7 +83,7 @@ async function getSecondApi(url) {
     if(response) {
         hideloder();
     }
-    displayBerries(data.results);
-}*/
+    displayBerries(data.berries);
+}
 
  

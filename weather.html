@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Weather</title>
+</head>
+<body onload="get_weather()">
+
+<button onclick="get_weather()">Refresh</button>
+
+<div id="list">
+</div>
+
+<script>
+const l = document.getElementById("list");
+let clear_list = function() {
+    while (l.firstChild) {
+        l.removeChild(l.firstChild);
+    }
+};
+
+const URL="https://api.open-meteo.com/v1/forecast?latitude=40.0&longitude=-104.0&current_weather=true"
+
+async function get_weather() {
+    clear_list();
+    const ol = document.createElement('ol');
+    l.appendChild(ol);
+
+    const response = await fetch(URL)
+    const weather = await response.json();
+    for (const datum in weather) {
+        const li = document.createElement('li');
+        if (datum == 'current_weather') {
+            const current_weather = weather[datum];
+            for (const member in current_weather) {
+                li.textContent += member + ': ' + current_weather[member] + ' ';
+            }
+        } else {
+            li.textContent = datum + ': ' + weather[datum];
+        }
+        ol.appendChild(li);
+    }
+};
+</script>
+
+</body>
+</html>
