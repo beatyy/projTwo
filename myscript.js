@@ -25,11 +25,24 @@ function show(data) {
 }
 
 function displayBerries(moo) {
-    let table = document.getElementById("berries");
+    let berries = document.getElementById("berries");
+    if(berries.hasChildNodes()) {
+        berries.removeChild(berries.firstChild);
+    }
+
+    var table = document.createElement("table");
+    
+    berries.appendChild(table);
+
     //let data = Object.keys(moo);
     let tableH = ["Berries", "url"];
     generateTableHead(table, tableH)
     generateSecondTable(table, moo);
+
+    document.getElementById("berriesCount").innerHTML = moo.length
+    if (moo.length > 10){
+        document.getElementById("berriesCount").style.backgroundColor ="red";
+    }
 }
 
 function generateTableHead(table, data) {
